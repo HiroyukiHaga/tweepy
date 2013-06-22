@@ -181,6 +181,9 @@ def bind_api(**config):
                 except Exception, e:
                     raise TweepError('Failed to decompress data: %s' % e)
             result = self.api.parser.parse(self, body)
+            
+            # we need to take alook raw data
+            result.__dict__['_raw'] = body
 
             conn.close()
 
