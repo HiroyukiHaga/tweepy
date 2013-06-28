@@ -183,8 +183,13 @@ def bind_api(**config):
             result = self.api.parser.parse(self, body)
             
             # we need to take alook raw data
-            result.__dict__['_raw'] = body
-
+            try:
+                result.__dict__['_raw'] = body
+            except:
+                try:
+                    result.append(body)
+                except:
+                    print type(result)
             conn.close()
 
             # Store result into cache if one is available.
